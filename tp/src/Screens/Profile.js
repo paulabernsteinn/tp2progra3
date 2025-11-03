@@ -4,15 +4,23 @@ import { View } from 'react-native-web';
 import { auth } from '../Firebase/config';
 import { Component } from 'react';
 
-function Profile(props){
-// class Profile extends Component{
-//     constructor(props){
-//         super(props);
-//         this.state = {
-//             usuarios
-//         }
-//     }
-// }
+
+
+class Profile extends Component{
+   constructor(props){
+      super(props);
+      this.state = {
+        
+         }
+    } 
+
+
+logout(){
+    console.log(auth.currentUser);
+   auth.signOut()
+   this.props.navigation.navigate('Login')
+}
+
 
 //     db.collection('users').onSnapshot(
 //         docs =>{
@@ -26,20 +34,22 @@ function Profile(props){
 //                usuarios: 
 //            })
 //         })
-    return(
+
+
+render() {return(
         
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
             <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
-                <Text style={styles.textoceleste}>Desloguearse</Text>
+                <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
             <Text> Username:  {auth.currentUser.email} </Text>
             <Text> Email: {auth.currentUser.email} </Text>
         </View>
         
-    )
- 
-}
+    )}}
+
+
 
 const styles = StyleSheet.create({
    titulo:{

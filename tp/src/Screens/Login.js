@@ -79,11 +79,6 @@ class Login extends Component{
       <Text style={styles.textoceleste}> Ir al registro </Text>
       </Pressable>
 
-      <Pressable
-        onPress={ ()=> this.props.navigation.navigate('HomeMenu')}>
-        <Text style={styles.textonaranja}> Entrar a la App </Text>
-      </Pressable>
-
   </View>
 )}}
 
