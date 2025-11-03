@@ -16,14 +16,12 @@ class Register extends Component{
   }
 
   onSubmit(){
-    console.log(this.state.email)
-    console.log(this.state.username)
+
     auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then( response => {
       console.log(response);
       this.setState({registered: true});
       this.props.navigation.navigate('Login')
-
 
       db.collection('users').add({
         owner: this.state.email,
@@ -42,27 +40,35 @@ class Register extends Component{
   render (){
     return (
       <View style={styles.contenedor}>
-      
-      <Text style={styles.titulo}>Registro</Text>
-      <TextInput style={styles.input} 
-        keyboardType='email-address'
-        placeholder='email'
-        onChangeText={ text => this.setState({email:text}) }
-        value={this.state.email} />
-      <TextInput style={styles.input} 
-        keyboardType='default'
-        placeholder='usuario'
-        onChangeText={ text => this.setState({username:text}) }
-        value={this.state.username}/> 
-      <TextInput style={styles.input} 
-        keyboardType='default'
-        placeholder='password'
-        secureTextEntry={true} 
-        onChangeText={ text => this.setState({password:text}) }
-        value={this.state.password}/> 
-      <Pressable onPress={() => this.onSubmit()}>
-        <Text> Registra </Text> 
-      </Pressable>
+        <Text style={styles.titulo}>Registro</Text>
+
+        <TextInput style={styles.input} 
+          keyboardType='email-address'
+          placeholder='email'
+          onChangeText={ text => this.setState({email:text}) }
+          value={this.state.email} />
+
+        <TextInput style={styles.input} 
+          keyboardType='default'
+          placeholder='usuario'
+          onChangeText={ text => this.setState({username:text}) }
+          value={this.state.username}/> 
+
+        <TextInput style={styles.input} 
+          keyboardType='default'
+          placeholder='password'
+          secureTextEntry={true} 
+          onChangeText={ text => this.setState({password:text}) }
+          value={this.state.password}/> 
+
+        <Pressable onPress={() => this.onSubmit()} style={styles.boton}>
+          <Text style={styles.textoboton}> Registrate </Text> 
+        </Pressable> 
+        
+        <Pressable onPress={ ()=> this.props.navigation.navigate('Login')}>
+          <Text style={styles.textoceleste}>Ya tengo cuenta</Text>
+        </Pressable>
+
       </View>
     )}
   }

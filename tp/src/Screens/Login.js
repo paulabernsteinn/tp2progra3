@@ -3,9 +3,6 @@ import { View, Text, Pressable, TextInput } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { auth } from '../Firebase/config'
 
-
-
-
 class Login extends Component{
   constructor(props){
     super(props);
@@ -48,32 +45,35 @@ class Login extends Component{
   return (
   <View style={styles.contenedor}>
   <Text style={styles.titulo}> Formulario de login </Text> 
-  <Pressable
-   onPress={ ()=> this.props.navigation.navigate('Register')}>
-   <Text style={styles.textoceleste}>Ir al registro  </Text>
-</Pressable>
-<Pressable
-   onPress={ ()=> this.props.navigation.navigate('HomeMenu')}>
-   <Text style={styles.textonaranja}> Entrar a la App  </Text>
-</Pressable>
 
-<Text>Login</Text>
       <TextInput style={styles.input} 
         keyboardType='email-address'
         placeholder='email'
         onChangeText={ text => this.setState({email:text}) }
         value={this.state.email} />
+
       <TextInput style={styles.input} 
         keyboardType='default'
         placeholder='password'
          secureTextEntry={true}
         onChangeText={ text => this.setState({password:text}) }
         value={this.state.password}/> 
+
       <Text>{this.state.error}</Text>
+
       <Pressable onPress={() => this.onSubmit()} style={styles.boton}>
       <Text style={styles.textoboton}> Login </Text> 
       </Pressable>
 
+      <Pressable
+      onPress={ ()=> this.props.navigation.navigate('Register')}>
+      <Text style={styles.textoceleste}> Ir al registro </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={ ()=> this.props.navigation.navigate('HomeMenu')}>
+        <Text style={styles.textonaranja}> Entrar a la App </Text>
+      </Pressable>
 
   </View>
 )}}
