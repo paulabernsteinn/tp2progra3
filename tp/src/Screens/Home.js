@@ -6,7 +6,6 @@ function Home(){
     return(
         <View>
             <Text style={styles.titulo}>Home</Text>
-            <DynamicForm/>
         </View>
     )
 }
