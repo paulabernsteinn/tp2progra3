@@ -3,17 +3,35 @@ import {Text, Pressable, StyleSheet} from 'react-native';
 import { View } from 'react-native-web';
 import { auth } from '../Firebase/config';
 import { Component } from 'react';
-
+import { db } from '../Firebase/config';
 
 
 class Profile extends Component{
    constructor(props){
       super(props);
       this.state = {
-        
+        username: [],
          }
     } 
 
+componentDidMount() {
+    
+    db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+        docs =>{
+                let userFound = [];
+           docs.forEach( doc => {
+                userFound.push({
+                    id: doc.id,
+                    data: doc.data()
+        })
+            this.setState({
+               username: userFound
+           })
+        })}
+    )
+
+    
+      }
 
 logout(){
     console.log(auth.currentUser);
@@ -21,29 +39,15 @@ logout(){
    this.props.navigation.navigate('Login')
 }
 
-
-//     db.collection('users').onSnapshot(
-//         docs =>{
-//                 let uers = [];
-//            docs.forEach( doc => {
-//                 users.push({
-//                     id: doc.id,
-//                     data: doc.data()
-//         })
-//             this.setState({
-//                usuarios: 
-//            })
-//         })
-
-
-render() {return(
+render() {
+    return(
         
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
             <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
                 <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
-            <Text> Username:  {auth.currentUser.email} </Text>
+            <Text> Username:   {this.state.username[0].data.username} </Text>
             <Text> Email: {auth.currentUser.email} </Text>
         </View>
         
