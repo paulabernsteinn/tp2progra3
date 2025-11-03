@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import { View } from 'react-native-web';
-import DynamicForm from '..//Components/DynamicForm';
 
 function Home(){
     return(
