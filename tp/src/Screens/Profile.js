@@ -47,13 +47,13 @@ render() {
             <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
                 <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
-            <Text> Username:   {this.state.username[0].data.username} </Text>
+           
             <Text> Email: {auth.currentUser.email} </Text>
         </View>
         
     )}}
 
-
+// <Text> Username:   {this.state.username[0].data.username} </Text> esto iba en la linea 50 pero no anda
 
 const styles = StyleSheet.create({
    titulo:{

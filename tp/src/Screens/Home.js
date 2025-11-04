@@ -1,14 +1,51 @@
-import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import { View } from 'react-native-web';
+import React, { Component } from "react";
+import { Text } from "react-native";
 
-function Home(){
-    return(
-        <View>
-            <Text style={styles.titulo}>Home</Text>
+import { FlatList, View } from "react-native-web";
+
+import { StyleSheet } from "react-native";
+
+import Post from "../Components/Post";
+import { db } from "../Firebase/config";
+
+class Home extends Component{
+constructor(props){
+    super(props);
+    this.state = {
+        posts: []
+    }}
+    componentDidMount(){
+        db.collection('posts').onSnapshot(
+    docs =>{
+            let posts2 = [];
+       docs.forEach( doc => {
+            posts2.push({
+                id: doc.id,
+                data: doc.data()
+    })
+           this.setState({
+            posts: posts2,
+            
+       })
+    
+       
+    })}
+)}
+   
+render(){
+return(
+              <View >
+        <Text >Home</Text>
+       
+         <Text> Posts</Text>
+        <FlatList
+            data={ this.state.posts }
+            keyExtractor={ item => item.id.toString() }
+            renderItem={ ({item}) => <Post info= {item} /> }
+/>
         </View>
     )
-}
+}}
 
 const styles = StyleSheet.create({
    titulo:{

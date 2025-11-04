@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Pressable, TextInput } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { auth, db } from '../Firebase/confirg'
+import { auth, db } from '../Firebase/config'
 
 
 class NuevoPost extends Component{
@@ -20,6 +20,7 @@ class NuevoPost extends Component{
       db.collection('posts').add({
         mensaje: this.state.mensaje,
         createdAt: Date.now(),
+        likes: []
     })
 
     .then(res =>{
