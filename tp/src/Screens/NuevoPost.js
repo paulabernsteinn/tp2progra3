@@ -19,6 +19,7 @@ class NuevoPost extends Component{
     this.props.navigation.navigate('Profile')
       db.collection('posts').add({
         mensaje: this.state.mensaje,
+        owner: auth.currentUser.email,
         createdAt: Date.now(),
         likes: []
     })

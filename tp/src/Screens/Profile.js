@@ -44,6 +44,7 @@ render() {
         
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
+              <Text style={styles.subtitulo}>Mis posteos</Text>
             <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
                 <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
@@ -78,7 +79,14 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         borderRadius: 10,    
-    }
+    },
+         subtitulo:{
+        fontWeight: "bold",
+        fontSize: 20,
+        marginBottom: 20,
+        alignSelf: 'flex-start',
+        marginLeft: 20
+   },
 })
 
 export default Profile
