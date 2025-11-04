@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import { FlatList, View } from "react-native-web";
 
@@ -7,6 +7,7 @@ import { StyleSheet } from "react-native";
 
 import Post from "../Components/Post";
 import { db } from "../Firebase/config";
+import Comentario from "../Components/Comentario";
 
 class Home extends Component{
 constructor(props){
@@ -35,14 +36,17 @@ constructor(props){
 render(){
 return(
               <View >
-        <Text >Home</Text>
+        <Text style={styles.titulo}>Home</Text>
        
-         <Text> Posts</Text>
-        <FlatList
+         <Text style={styles.subtitulo}> Posts</Text>
+        <FlatList style={styles.texto}
             data={ this.state.posts }
             keyExtractor={ item => item.id.toString() }
             renderItem={ ({item}) => <Post info= {item} /> }
+            
+           
 />
+ 
         </View>
     )
 }}
@@ -51,6 +55,20 @@ const styles = StyleSheet.create({
    titulo:{
         fontWeight: "bold",
         fontSize: 30,
+        marginBottom: 20,
+        alignSelf: 'flex-start',
+        marginLeft: 20
+   },
+      subtitulo:{
+        fontWeight: "bold",
+        fontSize: 20,
+        marginBottom: 20,
+        alignSelf: 'flex-start',
+        marginLeft: 20
+   },
+       texto:{
+        
+        fontSize: 10,
         marginBottom: 20,
         alignSelf: 'flex-start',
         marginLeft: 20
