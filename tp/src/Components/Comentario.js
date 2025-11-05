@@ -25,8 +25,7 @@ onSubmit(){
         <View >
                 <TextInput style= {style.input}
                 keyboardType='default'
-                placeholder='Comentario'
-                secureTextEntry={true} 
+                placeholder='Comentario' 
                 onChangeText={ text => this.setState({comentario:text}) }
                  value={this.state.comentario}/>
                

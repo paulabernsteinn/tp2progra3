@@ -21,7 +21,7 @@ class Post extends Component {
        
 
    
-    like(){
+      like(){
     db.collection('posts')
     .doc(this.props.info.id)
     .update(
@@ -42,13 +42,22 @@ class Post extends Component {
        )
 
    }
+   comentar(){
+    console.log("comentar");
+    
+   }
     
     
     render(){return (
-        <View >
+        <View style={styles.fondo}>
             <Text>{this.props.info.data.mensaje}</Text>
-            <Pressable onPress={()=> this.like()}>  <Text >Me gusta </Text> </Pressable>
-            <Text >Cantidad de Me gusta :  </Text>
+            <Text>Creador del posteo: {this.props.info.data.owner}</Text>
+      
+            <Pressable onPress={()=> this.like()}>  <Text style={styles.megusta}>Me gusta </Text> </Pressable>
+            <Text >Cantidad de Me gusta : {this.props.info.data.likes.length} </Text>
+                   <Pressable onPress = {() => this.props.navigation.navigate('Comentario' )}>
+                 <Text style={styles.boton}>Comentar </Text>
+        </Pressable>
         </View>
     )
 }}
@@ -58,6 +67,39 @@ const styles = StyleSheet.create({
         width: 100
         
     },
+    fondo: {
+        backgroundColor: 'rgba(212, 217, 217, 0.53)',
+        width: 300,
+        borderRadius: 4,
+        padding: 10,
+        marginTop: 10
+    },
+       boton:{
+       backgroundColor: '#28a745',
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 6,
+       paddingBottom: 6,
+       textAlign:"center",
+       borderRadius: 4,
+       borderWidth: 1,
+       borderStyle: 'solid',
+       borderColor: '#28a745',
+       marginBottom: 10
+   },
+        megusta:{
+       backgroundColor: '#f06565ff',
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 6,
+       paddingBottom: 6,
+       textAlign:"center",
+       borderRadius: 4,
+       borderWidth: 1,
+       borderStyle: 'solid',
+       borderColor: '#f06565ff',
+       marginBottom: 10
+   },
 })
 
    

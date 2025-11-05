@@ -5,12 +5,16 @@ import { auth } from '../Firebase/config';
 import { Component } from 'react';
 import { db } from '../Firebase/config';
 
+import { FlatList} from "react-native-web";
+import Post from '../Components/Post';
+
 
 class Profile extends Component{
    constructor(props){
       super(props);
       this.state = {
         username: [],
+        postsUsuario: [],
          }
     } 
 
@@ -30,6 +34,17 @@ componentDidMount() {
         })}
     )
 
+      db.collection('posts')
+      .where('owner', '==', auth.currentUser.email)          
+      .onSnapshot(docs => {
+        let postsUsuario = [];
+        docs.forEach(doc => postsUsuario.push({ 
+            id: doc.id, 
+            data: doc.data() 
+        }));
+        this.setState({ postsUsuario: postsUsuario });
+      });
+
     
       }
 
@@ -45,6 +60,13 @@ render() {
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
               <Text style={styles.subtitulo}>Mis posteos</Text>
+             <FlatList 
+            data={ this.state.postsUsuario }
+            keyExtractor={ item => item.id.toString() }
+            renderItem={ ({item}) => <Post info= {item} navigation={this.props.navigation}/> }
+            
+           
+/>
             <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
                 <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
