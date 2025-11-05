@@ -32,6 +32,7 @@ onSubmit(){
                 <Pressable style= {style.boton} onPress={() => this.onSubmit()}>
                 <Text style= {style.textoBoton}> Comentar </Text> 
                 </Pressable> 
+                 
         </View>
     )}
 }

@@ -24,25 +24,33 @@ componentDidMount() {
         docs =>{
                 let userFound = [];
            docs.forEach( doc => {
-                userFound.push({
-                    id: doc.id,
-                    data: doc.data()
+             userFound.push({
+                id: doc.id,
+                user: doc.data()}) 
+               
         })
-            this.setState({
+        
+        
+             this.setState({
                username: userFound
-           })
-        })}
+               
+        })
+        console.log(username);
+    }
+        
     )
 
-      db.collection('posts')
-      .where('owner', '==', auth.currentUser.email)          
-      .onSnapshot(docs => {
+      db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
+        docs => {
         let postsUsuario = [];
-        docs.forEach(doc => postsUsuario.push({ 
+        docs.forEach(doc => 
+            postsUsuario.push({ 
             id: doc.id, 
             data: doc.data() 
         }));
-        this.setState({ postsUsuario: postsUsuario });
+        this.setState({ 
+            postsUsuario: postsUsuario 
+        });
       });
 
     
@@ -59,6 +67,8 @@ render() {
         
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
+            <Text> Email: {auth.currentUser.email} </Text>
+          
               <Text style={styles.subtitulo}>Mis posteos</Text>
              <FlatList 
             data={ this.state.postsUsuario }
@@ -71,7 +81,7 @@ render() {
                 <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
             </Pressable>
            
-            <Text> Email: {auth.currentUser.email} </Text>
+            
         </View>
         
     )}}

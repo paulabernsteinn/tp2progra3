@@ -15,7 +15,6 @@ constructor(props){
    
     render(){return (
         <View >
-        
         <Comentario />
      </View>
     )
