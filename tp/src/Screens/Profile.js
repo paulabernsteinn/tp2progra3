@@ -68,7 +68,7 @@ render() {
         <View>
             <Text style={styles.titulo}>Mi perfil</Text>
             <Text> Email: {auth.currentUser.email} </Text>
-          
+          <Text> Username:   {auth.currentUser.username} </Text>
               <Text style={styles.subtitulo}>Mis posteos</Text>
              <FlatList 
             data={ this.state.postsUsuario }
