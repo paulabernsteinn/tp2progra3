@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Pressable, Text } from "react-native";
-
 import { FlatList, View } from "react-native-web";
-
 import { StyleSheet } from "react-native";
-
 import Post from "../Components/Post";
 import { db } from "../Firebase/config";
 import Comentario from "../Components/Comentario";
@@ -23,51 +20,44 @@ constructor(props){
             posts2.push({
                 id: doc.id,
                 data: doc.data()
-    })
-           this.setState({
-            posts: posts2,
-            
-       })
-    
-       
+            })
+        this.setState({
+        posts: posts2,
+        }) 
     })}
 )}
    
 render(){
 return(
-              <View >
-        <Text style={styles.titulo}>Home</Text>
-       
-         <Text style={styles.subtitulo}> Posts</Text>
+  <View style={styles.contenedor}>
+        <Text style={styles.titulo}>Recetas deliciosas</Text>
+        <Text style={styles.subtitulo}>Posts</Text>
         <FlatList style={styles.texto}
             data={ this.state.posts }
             keyExtractor={ item => item.id.toString() }
             renderItem={ ({item}) => <Post info= {item} navigation={this.props.navigation}/> }
-            
-           
-/>
- 
-        </View>
-    )
-}}
+            />
+    </View>
+)}
+}
 
 const styles = StyleSheet.create({
    titulo:{
-        fontWeight: "bold",
-        fontSize: 30,
-        marginBottom: 20,
-        alignSelf: 'flex-start',
-        marginLeft: 20
-   },
-      subtitulo:{
-        fontWeight: "bold",
-        fontSize: 20,
-        marginBottom: 20,
-        alignSelf: 'flex-start',
-        marginLeft: 20
-   },
-       texto:{
-        
+       fontWeight: "bold",
+       fontSize: 30,
+       margin: 20,
+  },
+  subtitulo:{
+       fontWeight: "bold",
+       fontSize: 20,
+       marginBottom: 20,
+  },
+  contenedor:{
+    justifyContent: 'center',
+    alignItems: 'center', 
+    padding: 20,
+  },
+  texto:{
         fontSize: 10,
         marginBottom: 20,
         alignSelf: 'flex-start',

@@ -13,30 +13,23 @@ class Post extends Component {
     constructor(props){
         super(props)
         this.state= {
-            
-            likeado: false, 
-            
+            likeado: false,    
         }}
 
-       
 
-   
-      like(){
+like(){
     db.collection('posts')
     .doc(this.props.info.id)
     .update(
 
         this.props.info.data.likes.includes(auth.currentUser.email) ?
-            {likes : firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)}
-            
+            {likes : firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)}    
         :
            {likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)}
-           
-        
+            
        )
        .then((res)=>{
         console.log(res);
-        
        })
        .catch(err => console.log(err)
        )
@@ -44,7 +37,6 @@ class Post extends Component {
    }
    comentar(){
     console.log("comentar");
-    
    }
     
     
@@ -53,11 +45,12 @@ class Post extends Component {
             <Text>{this.props.info.data.mensaje}</Text>
             <Text>Creador del posteo: {this.props.info.data.owner}</Text>
       
-            <Pressable onPress={()=> this.like()}>  <Text style={styles.megusta}>Me gusta </Text> </Pressable>
-            <Text >Cantidad de Me gusta : {this.props.info.data.likes.length} </Text>
-                   <Pressable onPress = {() => this.props.navigation.navigate('Comentario' )}>
-                 <Text style={styles.boton}>Comentar </Text>
-        </Pressable>
+            <Pressable onPress={()=> this.like()} style={styles.megusta}>  <Text style={styles.textoboton}>Me gusta </Text> </Pressable>
+            <Text >Cantidad de "Me gusta": {this.props.info.data.likes.length} </Text>
+            
+            <Pressable onPress = {() => this.props.navigation.navigate('Comentario' )} style={styles.comentar}>
+            <Text style={styles.textoboton}>Comentar </Text> 
+            </Pressable>
         </View>
     )
 }}
@@ -65,41 +58,47 @@ const styles = StyleSheet.create({
     imagen:{
         height: 100,
         width: 100
-        
     },
     fondo: {
         backgroundColor: 'rgba(212, 217, 217, 0.53)',
         width: 300,
         borderRadius: 4,
         padding: 10,
-        marginTop: 10
+        marginBottom: 20,
+
     },
-       boton:{
+    comentar:{
+       height: 30,
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 6,
+       paddingBottom: 6,
+       borderColor:'#ccc',
+       borderStyle: 'solid',
+       borderRadius: 10,
+       marginTop: 10,
+       marginBottom: 10,
        backgroundColor: '#28a745',
+   },
+    megusta:{
+        height: 30,
        paddingLeft: 10,
        paddingRight: 10,
        paddingTop: 6,
        paddingBottom: 6,
-       textAlign:"center",
-       borderRadius: 4,
-       borderWidth: 1,
+       borderColor:'#ccc',
        borderStyle: 'solid',
-       borderColor: '#28a745',
-       marginBottom: 10
-   },
-        megusta:{
+       borderRadius: 10,
+       marginTop: 10,
+       marginBottom: 10,
        backgroundColor: '#f06565ff',
-       paddingLeft: 10,
-       paddingRight: 10,
-       paddingTop: 6,
-       paddingBottom: 6,
-       textAlign:"center",
-       borderRadius: 4,
-       borderWidth: 1,
-       borderStyle: 'solid',
-       borderColor: '#f06565ff',
-       marginBottom: 10
    },
+   textoboton:{
+       textAlign:"center",
+       fontSize: 15,
+       fontWeight: 'bold',
+   },
+
 })
 
    

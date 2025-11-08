@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-
-
 import { FlatList, View } from "react-native-web";
-
-
 import Comentario from "../Components/Comentario";
 
 class Home extends Component{
@@ -14,7 +10,7 @@ constructor(props){
     }}
    
     render(){return (
-        <View >
+        <View>
         <Comentario />
      </View>
     )

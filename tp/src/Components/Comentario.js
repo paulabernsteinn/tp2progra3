@@ -5,8 +5,6 @@ import { Text } from "react-native";
 
 import { TextInput, View } from "react-native-web";
 
-
-
 class Comentario extends Component  {
      constructor(props){
     super(props);
@@ -17,59 +15,73 @@ class Comentario extends Component  {
 
 onSubmit(){
     console.log(this.state.comentario);
-    
-    
 }
  
     render () {return (
-        <View >
-                <TextInput style= {style.input}
+        <View style={styles.contenedor}>
+            <Text style={styles.titulo}>Recetas deliciosas</Text>
+            <Text style={styles.subtitulo}>Deja tu comentario!</Text>
+
+                <TextInput style= {styles.input}
                 keyboardType='default'
                 placeholder='Comentario' 
                 onChangeText={ text => this.setState({comentario:text}) }
                  value={this.state.comentario}/>
                
-                <Pressable style= {style.boton} onPress={() => this.onSubmit()}>
-                <Text style= {style.textoBoton}> Comentar </Text> 
+                <Pressable style= {styles.boton} onPress={() => this.onSubmit()}>
+                <Text style= {styles.textoBoton}> Comentar </Text> 
                 </Pressable> 
-                 
         </View>
     )}
 }
 
-let style = StyleSheet.create({
+let styles = StyleSheet.create({
     titulo:{
-        fontSize: 50,
-        fontWeight: "bold",
-        marginLeft:10
-    },   
+       fontWeight: "bold",
+       fontSize: 30,
+       margin: 20,
+       textAlign:"center",
+  },
+  subtitulo:{
+       fontWeight: "bold",
+       fontSize: 20,
+       marginBottom: 20,
+       textAlign:"center",
+  },
      contenedor: {
-        paddingHorizontal: 10,
-        marginTop: 20
+        padding: 20,
     },
     input: {
-        height: 20,
-paddingVertical: 15,
-paddingHorizontal: 10,
-borderBottomWidth: 1,
-borderColor:"‘#ccc",
-borderCurve: 6,
-marginVertical: 10
-
+        height: 50,
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 15,
+       paddingBottom: 15,
+       borderWidth: 1,
+       borderColor:'#ccc',
+       borderStyle: 'solid',
+       borderRadius: 10,
+       marginTop: 10,
+       marginBottom: 10
     },
     boton: {
-    backgroundColor:"#28a745" , 
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    textAlign: "center",
-    borderRadius: 4, 
-    borderColor: "#28a745",
-    margin: 10
-
+       height: 50,
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 15,
+       paddingBottom: 15,
+       borderWidth: 1,
+       borderColor:'#ccc',
+       borderStyle: 'solid',
+       borderRadius: 10,
+       marginTop: 10,
+       backgroundColor: '#28a745',
     }, 
 
     textoBoton: {
-        color:" #fff"
+       textAlign:"center",
+       fontSize: 15,
+       fontWeight: 'bold',
     }
    
 })

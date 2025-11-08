@@ -64,11 +64,11 @@ logout(){
 
 render() {
     return(
+        <View style={styles.contenedor}>
         
-        <View>
-            <Text style={styles.titulo}>Mi perfil</Text>
-            <Text> Email: {auth.currentUser.email} </Text>
-          <Text> Username:   {auth.currentUser.username} </Text>
+        <Text style={styles.titulo}>Mi perfil</Text>
+        <Text style={styles.texto}> Email: {auth.currentUser.email} </Text>
+        <Text style={styles.texto}> Username:   {auth.currentUser.username} </Text>
               <Text style={styles.subtitulo}>Mis posteos</Text>
              <FlatList 
             data={ this.state.postsUsuario }
@@ -77,8 +77,8 @@ render() {
             
            
 />
-            <Pressable onPress={ ()=> props.navigation.navigate('Login')}>
-                <Pressable style={styles.textoceleste} onPress={()=> this.logout()}> <Text>Desloguearse</Text></Pressable>
+            <Pressable onPress={ ()=> props.navigation.navigate('Login')} >
+                <Pressable style={styles.boton} onPress={()=> this.logout()}> <Text style={styles.textoboton}>Desloguearse</Text></Pressable>
             </Pressable>
            
             
@@ -90,35 +90,48 @@ render() {
 
 const styles = StyleSheet.create({
    titulo:{
-        fontWeight: "bold",
-        fontSize: 30,
-        marginBottom: 20,
-        alignSelf: 'flex-start',
-        marginLeft: 20
+       fontWeight: "bold",
+       fontSize: 30,
+       margin: 20,
+       textAlign:"center",
+  },
+  subtitulo:{
+       fontWeight: "bold",
+       fontSize: 20,
+        marginTop: 20,
+       marginBottom: 20,
+       textAlign:"center",
+  },
+   boton:{
+       height: 50,
+       paddingLeft: 10,
+       paddingRight: 10,
+       paddingTop: 15,
+       paddingBottom: 15,
+       borderWidth: 1,
+       borderColor:'#ccc',
+       borderStyle: 'solid',
+       borderRadius: 10,
+       marginTop: 30,
+       backgroundColor: '#070707ff',
    },
-   textoceleste:{
-        textAlign:"center",
-        fontSize: 20,
-        backgroundColor: '#0bc8f7',
-        padding: 10,
-        marginBottom: 10,
-        borderRadius: 10,  
-    },
-    textonaranja:{
-        textAlign:"center",
-        fontSize: 20,
-        backgroundColor: '#f88c10ff', 
-        padding: 10,
-        marginBottom: 10,
-        borderRadius: 10,    
-    },
-         subtitulo:{
-        fontWeight: "bold",
-        fontSize: 20,
-        marginBottom: 20,
-        alignSelf: 'flex-start',
-        marginLeft: 20
+   textoboton:{
+       textAlign:"center",
+       fontSize: 15,
+       fontWeight: 'bold',
+       color: 'white'
    },
+   texto:{
+       textAlign:"left",
+       fontSize: 15,
+       alignSelf:'flex-start'
+   },
+    contenedor:{
+    justifyContent: 'center',
+    alignItems: 'center', 
+    padding: 20
+  },
+
 })
 
 export default Profile
