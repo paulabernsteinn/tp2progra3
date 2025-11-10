@@ -13,26 +13,29 @@ class Profile extends Component{
    constructor(props){
       super(props);
       this.state = {
-        username: [],
+        username: "",
         postsUsuario: [],
          }
     } 
 
 componentDidMount() {
     
-    db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+    db.collection('users')
+    .where('owner', '==', auth.currentUser.email)
+    .onSnapshot(
         docs =>{
-                let userFound = [];
+            let userFound = [];
            docs.forEach( doc => {
              userFound.push({
                 id: doc.id,
                 user: doc.data()}) 
                
         })
+        console.log(userFound);
         
         
              this.setState({
-               username: userFound
+               username: userFound[0].user.username
                
         })
         console.log(username);
@@ -63,12 +66,14 @@ logout(){
 }
 
 render() {
+    console.log(this.state);
+    
     return(
         <View style={styles.contenedor}>
         
         <Text style={styles.titulo}>Mi perfil</Text>
         <Text style={styles.texto}> Email: {auth.currentUser.email} </Text>
-        <Text style={styles.texto}> Username:   {auth.currentUser.username} </Text>
+        <Text style={styles.texto}> Username:   {this.state.username} </Text>
               <Text style={styles.subtitulo}>Mis posteos</Text>
              <FlatList 
             data={ this.state.postsUsuario }

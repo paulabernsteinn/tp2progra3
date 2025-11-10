@@ -44,11 +44,14 @@ like(){
         <View style={styles.fondo}>
             <Text>{this.props.info.data.mensaje}</Text>
             <Text>Creador del posteo: {this.props.info.data.owner}</Text>
+        
+
       
             <Pressable onPress={()=> this.like()} style={styles.megusta}>  <Text style={styles.textoboton}>Me gusta </Text> </Pressable>
-            <Text >Cantidad de "Me gusta": {this.props.info.data.likes.length} </Text>
+            <Text >Cantidad de likes: {this.props.info.data.likes.length} </Text>
             
-            <Pressable onPress = {() => this.props.navigation.navigate('Comentario' )} style={styles.comentar}>
+            
+            <Pressable onPress = {() => this.props.navigation.navigate('Comentario', {id: this.props.info.id} )} style={styles.comentar}>
             <Text style={styles.textoboton}>Comentar </Text> 
             </Pressable>
         </View>

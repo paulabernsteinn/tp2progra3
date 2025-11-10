@@ -2,25 +2,69 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Pressable } from "react-native";
 import { Text } from "react-native";
-
+import { FlatList } from "react-native-web";
 import { TextInput, View } from "react-native-web";
+import { db, auth } from '../Firebase/config' 
+import firebase from "firebase";
 
 class Comentario extends Component  {
      constructor(props){
     super(props);
     this.state = {
         comentario: "",
+        post: []
        
 }}
 
-onSubmit(){
-    console.log(this.state.comentario);
+componentDidMount(){
+    db.collection('posts')
+    .doc(this.props.route.params.id)
+    .onSnapshot(
+        docs =>{
+            
+            this.setState({
+                post: docs.data()
+            })
+            }
+    )
 }
+
+comentario(){   
+    db.collection('posts')
+    .doc(this.props.route.params.id)
+    .update(
+
+           {comentarios: firebase.firestore.FieldValue.arrayUnion({ comentario: this.state.comentario, email: auth.currentUser.email}),
+           }
+            
+       )
+       .then((res)=>{
+        console.log(res);
+       })
+       .catch(err => console.log(err)
+       )
+
+   }
  
-    render () {return (
+    render () {
+        console.log(this.state);
+        console.log(this.props);
+        
+        return (
+    
         <View style={styles.contenedor}>
+            
             <Text style={styles.titulo}>Recetas deliciosas</Text>
             <Text style={styles.subtitulo}>Deja tu comentario!</Text>
+            <Text> {this.state.post.mensaje} </Text>
+           
+            <FlatList style={styles.texto}
+            data={ this.state.post.comentarios }
+            keyExtractor={ (item, index) => index.toString() }
+            renderItem={ ({item}) => <View>   <Text> {item.comentario} </Text>   <Text > {item.email} </Text>  </View>}
+            />
+            
+            
 
                 <TextInput style= {styles.input}
                 keyboardType='default'
@@ -28,9 +72,12 @@ onSubmit(){
                 onChangeText={ text => this.setState({comentario:text}) }
                  value={this.state.comentario}/>
                
-                <Pressable style= {styles.boton} onPress={() => this.onSubmit()}>
+                <Pressable style= {styles.boton} onPress={() => this.comentario()}>
                 <Text style= {styles.textoBoton}> Comentar </Text> 
+                <Text style= {styles.textoBoton}>  </Text>
                 </Pressable> 
+
+                
         </View>
     )}
 }

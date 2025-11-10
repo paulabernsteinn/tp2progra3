@@ -21,7 +21,8 @@ class NuevoPost extends Component{
         mensaje: this.state.mensaje,
         owner: auth.currentUser.email,
         createdAt: Date.now(),
-        likes: []
+        likes: [],
+        comentarios: []
     })
 
     .then(res =>{
@@ -38,14 +39,14 @@ class NuevoPost extends Component{
 <View style={styles.contenedor}>
 
   <Text style={styles.titulo}> Recetas deliciosas </Text> 
-  <Text style={styles.subtitulo}> Agregá un nuevo posteo </Text> 
+  <Text style={styles.subtitulo}> Creá un nuevo post </Text> 
         <TextInput style={styles.input}
           keyboardType='default'
-          placeholder='Mensaje'
+          placeholder='Escribe aqui tu comenatio...'
           onChangeText={ text => this.setState({mensaje:text}) }
           value={this.state.mensaje}/> 
         <Pressable onPress={() => this.onSubmit()} style={styles.boton}>
-          <Text style={styles.textoboton}> ADD POST </Text> 
+          <Text style={styles.textoboton}> Publicar post </Text> 
         </Pressable>
         </View>
     )}}
