@@ -73,7 +73,7 @@ render() {
         
         <Text style={styles.titulo}>Mi perfil</Text>
         <Text style={styles.texto}> Email: {auth.currentUser.email} </Text>
-        <Text style={styles.texto}> Username:   {this.state.username} </Text>
+        <Text style={styles.texto}> Username: {this.state.username} </Text>
               <Text style={styles.subtitulo}>Mis posteos</Text>
              <FlatList 
             data={ this.state.postsUsuario }

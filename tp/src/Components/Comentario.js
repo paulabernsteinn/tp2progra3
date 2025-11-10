@@ -56,12 +56,12 @@ comentario(){
             
             <Text style={styles.titulo}>Recetas deliciosas</Text>
             <Text style={styles.subtitulo}>Deja tu comentario!</Text>
-            <Text> {this.state.post.mensaje} </Text>
+            <Text style= {styles.mensaje}> Post: {this.state.post.mensaje} </Text>
            
             <FlatList style={styles.texto}
             data={ this.state.post.comentarios }
             keyExtractor={ (item, index) => index.toString() }
-            renderItem={ ({item}) => <View>   <Text> {item.comentario} </Text>   <Text > {item.email} </Text>  </View>}
+            renderItem={ ({item}) => <View style= {styles.fondo}>   <Text> {item.comentario} </Text>   <Text > {item.email} </Text>  </View>}
             />
             
             
@@ -76,6 +76,10 @@ comentario(){
                 <Text style= {styles.textoBoton}> Comentar </Text> 
                 <Text style= {styles.textoBoton}>  </Text>
                 </Pressable> 
+
+                <Pressable style={styles.boton} onPress={ ()=> this.props.navigation.navigate('HomeMenu')}>
+                    <Text style={styles.textoBoton}> Volver a Home </Text>
+                </Pressable>
 
                 
         </View>
@@ -97,6 +101,14 @@ let styles = StyleSheet.create({
   },
      contenedor: {
         padding: 20,
+    },
+    fondo: {
+        backgroundColor: 'rgba(212, 217, 217, 0.53)',
+        width: 300,
+        borderRadius: 4,
+        padding: 10,
+        marginBottom: 20,
+
     },
     input: {
         height: 50,
@@ -124,12 +136,15 @@ let styles = StyleSheet.create({
        marginTop: 10,
        backgroundColor: '#28a745',
     }, 
-
     textoBoton: {
        textAlign:"center",
        fontSize: 15,
        fontWeight: 'bold',
+    },
+    mensaje: {
+       fontSize: 15,
+       fontWeight: 'bold',
+       padding: 10
     }
-   
 })
  export default Comentario
