@@ -13,7 +13,7 @@ constructor(props){
         posts: []
     }}
     componentDidMount(){
-        db.collection('posts').onSnapshot(
+        db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
     docs =>{
             let posts2 = [];
        docs.forEach( doc => {

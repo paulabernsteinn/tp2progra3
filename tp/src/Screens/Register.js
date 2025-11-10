@@ -21,6 +21,10 @@ class Register extends Component{
       this.setState({ error: 'El email está mal formateado' });
       return;
     }
+    if (this.state.username == '') {
+      this.setState({ error: 'Agregar un usuario' });
+      return;
+    }
     if (this.state.password.length < 6) {
       this.setState({ error: 'La contraseña debe tener al menos 6 caracteres.' });
       return;
@@ -30,6 +34,7 @@ class Register extends Component{
     .then( response => {
       console.log(response);
       this.setState({registered: true});
+      auth.signOut()
       this.props.navigation.navigate('Login')
 
       db.collection('users').add({
